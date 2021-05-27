@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.jar.Manifest
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var startStopBtn: FloatingActionButton
@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
                     != PackageManager.PERMISSION_GRANTED
                 ) {
                     requestLocationPermission()
-                }
-                else{
+                }  else{
                     changeServiceState()
                 }
+
             }
         }
         output = findViewById(R.id.output)
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     private fun locationChanged(l : Location){
         val tv = TextView(this@MainActivity)
         tv.textSize = 18F
-        tv.text = "Latitude: {l.latitude}; Longtitude: {l.longtitude}"
+        tv.text = "Latitude: ${l.latitude}; Longtitude: ${l.longitude}"
         output.addView(tv)
     }
 
