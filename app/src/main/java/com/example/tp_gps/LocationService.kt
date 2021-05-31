@@ -18,7 +18,6 @@ class LocationService: LifecycleService() {
     companion object{
         var running = false
     }
-    private val locationChanged: (Location)->Unit = :: locationChanged
 
     private fun locationChanged(l: Location){
         LocationData.location.postValue(l)
@@ -50,9 +49,10 @@ class LocationService: LifecycleService() {
         val channelId=
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createNotificationChannel()
-        }else{
+            }else {
             ""
         }
+
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
         val notification = notificationBuilder
             .setOngoing(true)

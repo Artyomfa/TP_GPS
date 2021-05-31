@@ -9,22 +9,27 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.jar.Manifest
 
 object LocationHelper: LocationListener {
     private var locationManager: LocationManager? = null
     private var locationUpdater: ((Location)->Unit)? = null
-
+    private lateinit var previousLocation: Location
+    public var distance: Float = 0.0F
+    val main = MainActivity()
     var imHere: Location? = null
+
     @RequiresApi(Build.VERSION_CODES.M)
     fun startLocationListening(context: Context, locationUpdater: (Location)-> Unit){
         locationManager = (context.getSystemService(Context.LOCATION_SERVICE) as LocationManager)
             .also {locationManager->
-                if(context.checkSelfPermission(ACCESS_FINE_LOCATION)
+                if (
+                    context.checkSelfPermission(ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED
                     && context.checkSelfPermission(ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED)
-                {
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
                     return
                 }
                 locationManager.requestLocationUpdates(
@@ -41,7 +46,23 @@ object LocationHelper: LocationListener {
     }
     override fun onLocationChanged(location: Location){
         locationUpdater?.invoke(location)
-        imHere = location
+        if (location.hasSpeed() && ::previousLocation.isInitialized) {
+            distance += previousLocation.distanceTo(location)
+        }
+        println("Latitude: ${location.latitude}; Longtitude: ${location.longitude}")
+        previousLocation = location
+        println("distance  " + distance.toString())
+        main.distance = distance
+        main.updateDistance(distance)
+        println("maindistance  " + main.distance.toString())
+    }
+
+    override fun onProviderDisabled(provider: String) {
+
+    }
+
+    override fun onProviderEnabled(provider: String) {
+
     }
 
 }

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TP_GPS</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="playing">Playing...</string>
+    <string name="stopped">Stopped...</string>
 </resources>
