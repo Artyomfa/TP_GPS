@@ -9,15 +9,13 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.jar.Manifest
 
 object LocationHelper: LocationListener {
     private var locationManager: LocationManager? = null
     private var locationUpdater: ((Location)->Unit)? = null
     private lateinit var previousLocation: Location
     public var distance: Float = 0.0F
-    val main = MainActivity()
+    private val wind = MainActivity()
     var imHere: Location? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -52,9 +50,9 @@ object LocationHelper: LocationListener {
         println("Latitude: ${location.latitude}; Longtitude: ${location.longitude}")
         previousLocation = location
         println("distance  " + distance.toString())
-        main.distance = distance
-        main.updateDistance(distance)
-        println("maindistance  " + main.distance.toString())
+        wind.distance = distance
+        wind.updateDistance(distance.toString())
+        println("maindistance  " + wind.distance.toString())
     }
 
     override fun onProviderDisabled(provider: String) {

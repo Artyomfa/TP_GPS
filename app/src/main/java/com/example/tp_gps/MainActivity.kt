@@ -12,12 +12,16 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.textViewDistance
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var startStopBtn: FloatingActionButton
-    private lateinit var output: LinearLayout
+   // private lateinit var output: LinearLayout
+    //private lateinit val textViewDistance:
     public var distance: Float = 0.0F
+       // lateinit var textViewDistance(R.id.textViewDistance) as TextView
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 println("Button touched")
                 println(i.toString())
                 println("distance   " + distance.toString())
-
+                //textViewDistance.text = i.toString()
                 i += 1
                 if (
                     context.checkSelfPermission(ACCESS_FINE_LOCATION)
@@ -44,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-        output = findViewById(R.id.output)
+     //   output = findViewById(R.id.output)
 
     }
 
@@ -88,11 +92,15 @@ class MainActivity : AppCompatActivity() {
         tv.textSize = 18F
         tv.text = "Latitude: ${l.latitude}; Longtitude: ${l.longitude}"
         println("Latitude: ${l.latitude}; Longtitude: ${l.longitude}")
-        output.addView(tv)
+        updateDistance(distance.toString())
+        //output.addView(tv)
     }
 
-    fun updateDistance(d: Float){
-        textViewDistance.text = LocationHelper.distance.toString()
+    fun updateDistance(d: String){
+       // textViewDistance.text = ""
+        //textViewDistance.text = d
+        println("Update distance")
+        //textViewDistance.text = ""
     }
 
 
@@ -106,6 +114,11 @@ class MainActivity : AppCompatActivity() {
             sendCommand(Constants.STOP_LOCATION_SERVICE)
             LocationData.location.removeObservers(this)
         }
+    }
+    fun setTextFields(str: String)
+    {
+      //  textViewDistance.text = ""
+        //textViewDistance.append(str)
     }
     override fun onStop(){
         super.onStop()
