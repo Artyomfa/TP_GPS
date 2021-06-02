@@ -1,6 +1,7 @@
 package com.example.tp_gps
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,16 +22,19 @@ import java.math.RoundingMode.valueOf
 class MainActivity : AppCompatActivity() {
 
     private lateinit var startStopBtn: FloatingActionButton
-    public var distance: Float = 0.0F
+    public var distance: Double = 0.0
+    private lateinit var tvD: TextView
+    private lateinit var output: LinearLayout
+    private var dist:String = "0.0"
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
-        var i: Int = 0
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-      //  operationField.text="123"
-        //textViewDistance.text="111"
+        tvD = findViewById<TextView>(R.id.textViewDistance)
+    //    operationField.text="123"
+        tvD.text="0.0"
+        var i: Int = 0
         //operationField.text="543"
        // tvDistance = findViewById(R.id.textViewDistance)
         startStopBtn = findViewById<FloatingActionButton>(R.id.startStopBtn).apply {
@@ -51,7 +56,12 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-     //   output = findViewById(R.id.output)
+        textViewDistance.setOnClickListener{
+            dist = renewDist()
+            println("tvD Distance = $dist")
+            textViewDistance.text = dist
+        }
+        output = findViewById(R.id.output)
 
     }
 
@@ -98,10 +108,22 @@ class MainActivity : AppCompatActivity() {
         //output.addView(tv)
     }
 
+
     fun updateDistance(d: String){
+        //setContentView(R.layout.activity_main)
+        dist = d
+        distance = dist.toDouble()
+        println("dist $dist distance $distance")
+        setTextFields(d)
+        //println("tvd text  = " + textViewDistance.text.toString())
+        //val tvD = findViewById(R.id.textViewDistance) as TextView
+       // println("tvD = $tvD")
+    //    tvD.text = ""
+       // textViewDistance = findViewById(R.id.textViewDistance)
        // textViewDistance.text = ""
-        //if(textViewDistance != null)
-          //  textViewDistance.text = d
+       // var tvD = findViewById<TextView>(R.id.textViewDistance)
+        //tvD.setText(d)
+     //   textViewDistance.append(d)
      //   println("Update distance")
      //   tvDistance.text=""
         //textViewDistance.setText(d)
@@ -121,10 +143,24 @@ class MainActivity : AppCompatActivity() {
             LocationData.location.removeObservers(this)
         }
     }
-    fun setTextFields(str: String)
+    private fun renewDist():String {
+
+        println("distdist123 $dist dads$distance")
+        return dist
+    }
+
+    private fun setTextFields(str: String)
     {
+        println("ddddd  $str")
+    //    findViewById<TextView>(R.id.textViewDistance).text = ""
+   // println("str = ${tvD.toString()}")
+        /*val tv = TextView(this@MainActivity)
+         tv.textSize = 18F
+         tv.text = "Latitude:; Longtitude: "
+        output.addView(tv)*/
+    //tvD.text = str
       //  textViewDistance.text = ""
-        //textViewDistance.append(str)
+       // textViewDistance.append(str)
     }
     override fun onStop(){
         super.onStop()

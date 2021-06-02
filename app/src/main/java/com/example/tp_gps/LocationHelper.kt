@@ -14,7 +14,7 @@ object LocationHelper: LocationListener {
     private var locationManager: LocationManager? = null
     private var locationUpdater: ((Location)->Unit)? = null
     private lateinit var previousLocation: Location
-    public var distance: Float = 0.0F
+    public var distance: Double = 0.0
     private val wind = MainActivity()
     var imHere: Location? = null
 
