@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     public var distance: Double = 0.0
     private lateinit var tvD: TextView
     private lateinit var output: LinearLayout
-    private var dist:String = "0.0"
+    public var dist:String = "0.0"
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,13 +37,14 @@ class MainActivity : AppCompatActivity() {
         var i: Int = 0
         //operationField.text="543"
        // tvDistance = findViewById(R.id.textViewDistance)
+        output = findViewById(R.id.output)
         startStopBtn = findViewById<FloatingActionButton>(R.id.startStopBtn).apply {
             setOnClickListener {
                 println("Button touched")
                 println(i.toString())
                 println("distance   " + distance.toString())
 
-               // textViewDistance.text = valueOf(i).toString()
+               // textViewDistance.text = "100"
                 i += 1
                 if (
                     context.checkSelfPermission(ACCESS_FINE_LOCATION)
@@ -61,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             println("tvD Distance = $dist")
             textViewDistance.text = dist
         }
-        output = findViewById(R.id.output)
 
     }
 
@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTextFields(str: String)
     {
-        println("ddddd  $str")
+        println("ddddd  $str dist  $dist    distance $distance")
     //    findViewById<TextView>(R.id.textViewDistance).text = ""
    // println("str = ${tvD.toString()}")
         /*val tv = TextView(this@MainActivity)

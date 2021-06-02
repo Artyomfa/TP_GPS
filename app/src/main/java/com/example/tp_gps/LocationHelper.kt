@@ -9,6 +9,8 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 object LocationHelper: LocationListener {
     private var locationManager: LocationManager? = null
@@ -46,10 +48,11 @@ object LocationHelper: LocationListener {
         locationUpdater?.invoke(location)
         if (location.hasSpeed() && ::previousLocation.isInitialized) {
             distance += previousLocation.distanceTo(location)
+            distance = BigDecimal(distance).setScale(2, RoundingMode.HALF_EVEN).toDouble()
         }
         println("Latitude: ${location.latitude}; Longtitude: ${location.longitude}")
         previousLocation = location
-        println("distance  " + distance.toString())
+        println("distance $distance")
         wind.distance = distance
         wind.updateDistance(distance.toString())
         println("maindistance  " + wind.distance.toString())
