@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTextFields(str: String)
     {
-        println("ddddd  $str dist  $dist    distance $distance")
+        println("str  $str distance_string  $dist    distance_double $distance")
     //    findViewById<TextView>(R.id.textViewDistance).text = ""
    // println("str = ${tvD.toString()}")
         /*val tv = TextView(this@MainActivity)
