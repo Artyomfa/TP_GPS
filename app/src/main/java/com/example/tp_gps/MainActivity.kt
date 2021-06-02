@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 println(i.toString())
                 println("distance   " + distance.toString())
 
-                textViewDistance.text = valueOf(i).toString()
+               // textViewDistance.text = valueOf(i).toString()
                 i += 1
                 if (
                     context.checkSelfPermission(ACCESS_FINE_LOCATION)
@@ -100,7 +100,8 @@ class MainActivity : AppCompatActivity() {
 
     fun updateDistance(d: String){
        // textViewDistance.text = ""
-        textViewDistance.text = d
+        //if(textViewDistance != null)
+          //  textViewDistance.text = d
      //   println("Update distance")
      //   tvDistance.text=""
         //textViewDistance.setText(d)
